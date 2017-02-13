@@ -37,6 +37,29 @@ class ThunderNodeForm extends NodeForm {
         }
       }
 
+      if ($this->moduleHandler->moduleExists('content_lock')) {
+        // Check if we must lock this entity.
+        /** @var \Drupal\content_lock\ContentLock\ContentLock $lock_service */
+        $lock_service = \Drupal::service('content_lock');
+        if ($lock_service->isLockable($node)) {
+          // We act only on edit form, not for a creation of a new entity.
+          if (!$node->isNew()) {
+            $element['save_continue']['#submit'][] = 'content_lock_form_submit';
+
+            $user = \Drupal::currentUser();
+            // We lock the content if it is currently edited by another user.
+            if (!$lock_service->locking($node->id(), $user->id(), 'node')) {
+              $form['#disabled'] = TRUE;
+
+              // Do not allow deletion, publishing, or unpublishing if locked.
+              if (isset($element['save_continue'])) {
+                unset($element['save_continue']);
+              }
+            }
+          }
+        }
+      }
+
     }
 
     return $element;
