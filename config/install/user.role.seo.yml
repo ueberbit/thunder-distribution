@@ -57,3 +57,4 @@ permissions:
   51: 'view unpublished terms in tags'
   52: 'access responsive preview'
   53: 'access video_browser entity browser pages'
+  54: 'break content lock'

@@ -1,0 +1,5 @@
+verbose: 1
+node:
+  article: article
+block_content: {  }
+taxonomy_term: {  }
