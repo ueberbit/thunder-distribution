@@ -42,6 +42,16 @@ interface UpdaterInterface {
   public function updateConfig($configName, array $configuration, array $expectedConfiguration = []);
 
   /**
+   * Execute update of configuration from update definitions.
+   *
+   * @param array $updateDefinitions
+   *   List of configuration definitions.
+   * @param \Drupal\thunder_updater\UpdateLogger $updateLogger
+   *   Update logger service.
+   */
+  public function executeUpdate(array $updateDefinitions, UpdateLogger $updateLogger);
+
+  /**
    * Marks a list of updates as successful.
    *
    * @param array $names
