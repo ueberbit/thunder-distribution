@@ -68,11 +68,11 @@ function thunder_article_update_8101() {
     ])->save();
 
     $updateLogger->info(t('Shariff field is added for article.'));
-    $thunderUpdater->markUpdatesSuccessful(['v1_1__shariff'], FALSE);
+    $thunderUpdater->checklist()->markUpdatesSuccessful(['v1_1__shariff'], FALSE);
   }
   else {
     $updateLogger->warning(t('Unable to place shariff field.'));
-    $thunderUpdater->markUpdatesFailed(['v1_1__shariff']);
+    $thunderUpdater->checklist()->markUpdatesFailed(['v1_1__shariff']);
   }
 
   return $updateLogger->output();
